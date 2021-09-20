@@ -3,7 +3,15 @@
     <section id="script.ael.screenscraper">
         <category id="ael_general" label="30010" help="">
 			<group id="1">
-                <setting id="scraper_steamgriddb_apikey" type="string" label="30101" help="">
+    <setting label="ScreenScraper Username" type="text" id="scraper_screenscraper_ssid" default="" />
+    <setting label="ScreenScraper Pass" type="text" id="scraper_screenscraper_sspass" default="" />
+
+    <setting id="separator" type="lsep" label="Scraper settings"/>
+    <!-- ScreenScraper settings are automatically generated with Python scripts -->
+    <setting label="ScreenScraper region" type="enum" id="scraper_screenscraper_region" default="0" values="World|Europe|USA|Japan|ScreenScraper|American continent|Asia|Australia|Bulgaria|Brazil|Canada|Chile|China|Custom|Czech republic|Germany|Denmark|Finland|France|Greece|Hungary|Israel|Italy|Korea|Kuwait|Middle East|Netherlands|Norway|New Zealand|Oceania|Peru|Poland|Portugal|Russia|Sweden|Slovakia|Spain|Turkey|Taiwan|United Kingdom" />
+    <setting label="ScreenScraper language" type="enum" id="scraper_screenscraper_language" default="0" values="English|Spanish|Japanese|Czech|Danish|German|Finnish|French|Hungarian|Italian|Korean|Dutch|Norwegian|Polish|Portuguese|Russian|Slovak|Swedish|Turkish|Chinese" />
+
+                <setting id="scraper_screenscraper_ssid" type="string" label="30101" help="">
                     <level>0</level>
                     <default></default>
                     <constraints>
@@ -13,7 +21,31 @@
                         <heading>30101</heading>
                     </control>
                 </setting>
-                <setting id="scraper_cache_dir" type="path" label="30102" help="">
+                <setting id="scraper_screenscraper_sspass" type="string" label="30102" help="">
+                    <level>0</level>
+                    <default></default>
+                    <constraints>
+                        <allowempty>true</allowempty>
+                    </constraints>
+                    <control type="edit" format="string">
+                        <heading>30101</heading>
+                    </control>
+                </setting>
+                <setting id="scraper_screenscraper_region" type="integer" label="30103" help="">
+                    <level>1</level>
+                    <default>1</default>
+                    <constraints>
+                        <options>
+                            <option label="30911">0</option>
+                            <option label="30912">1</option>
+                            <option label="30913">2</option>
+                            <option label="30914">3</option>
+                            <option label="30915">4</option>
+                        </options>
+                    </constraints>
+                    <control type="spinner" format="string"/>
+                </setting>
+                <setting id="scraper_cache_dir" type="path" label="30105" help="">
                     <level>1</level>
                     <default></default>
                     <constraints>
@@ -21,7 +53,7 @@
                         <allowempty>true</allowempty>
                     </constraints>
                     <control type="button" format="path">
-                        <heading>30102</heading>
+                        <heading>30105</heading>
                     </control>
                 </setting>
                 <setting id="log_level" type="integer" label="30129" help="">

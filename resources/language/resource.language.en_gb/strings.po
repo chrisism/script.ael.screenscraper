@@ -23,10 +23,22 @@ msgstr "settings.xml"
 # Settings options
 ############################
 msgctxt "#30101"
-msgid "SteamGridDB API key"
+msgid "ScreenScraper Username"
 msgstr "settings.xml"
 
 msgctxt "#30102"
+msgid "ScreenScraper Pass"
+msgstr "settings.xml"
+
+msgctxt "#30103"
+msgid "ScreenScraper region"
+msgstr "settings.xml"
+
+msgctxt "#30104"
+msgid "ScreenScraper language"
+msgstr "settings.xml"
+
+msgctxt "#30105"
 msgid "Cache directory"
 msgstr "settings.xml"
 
