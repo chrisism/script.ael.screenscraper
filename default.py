@@ -20,7 +20,7 @@ from ael.utils import kodilogging, io, kodi
 from ael.scrapers import ScraperSettings, ScrapeStrategy
 
 # Local modules
-from resources.lib.scraper import Screenscraper
+from resources.lib.scraper import ScreenScraper
 
 kodilogging.config() 
 logger = logging.getLogger(__name__)
@@ -80,12 +80,16 @@ def run_scraper(args):
                             args.server_host, 
                             args.server_port, 
                             settings, 
-                            Screenscraper(), 
+                            ScreenScraper(), 
                             pdialog)
                         
     if args.rom_id is not None:
         scraped_rom = scraper_strategy.process_single_rom(args.rom_id)
         pdialog.endProgress()
+        if scraped_rom is None:
+            kodi.notify_error('ROM scraping failed')
+            return
+        
         pdialog.startProgress('Saving ROM in database ...')
         scraper_strategy.store_scraped_rom(args.ael_addon_id, args.rom_id, scraped_rom)
         pdialog.endProgress()
@@ -93,6 +97,10 @@ def run_scraper(args):
     if args.romcollection_id is not None:
         scraped_roms = scraper_strategy.process_collection(args.romcollection_id)
         pdialog.endProgress()
+        if scraped_roms is None:
+            kodi.notify_error('ROM scraping failed')
+            return
+        
         pdialog.startProgress('Saving ROMs in database ...')
         scraper_strategy.store_scraped_roms(args.ael_addon_id, args.romcollection_id, scraped_roms)
         pdialog.endProgress()

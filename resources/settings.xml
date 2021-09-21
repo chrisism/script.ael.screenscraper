@@ -3,14 +3,6 @@
     <section id="script.ael.screenscraper">
         <category id="ael_general" label="30010" help="">
 			<group id="1">
-    <setting label="ScreenScraper Username" type="text" id="scraper_screenscraper_ssid" default="" />
-    <setting label="ScreenScraper Pass" type="text" id="scraper_screenscraper_sspass" default="" />
-
-    <setting id="separator" type="lsep" label="Scraper settings"/>
-    <!-- ScreenScraper settings are automatically generated with Python scripts -->
-    <setting label="ScreenScraper region" type="enum" id="scraper_screenscraper_region" default="0" values="World|Europe|USA|Japan|ScreenScraper|American continent|Asia|Australia|Bulgaria|Brazil|Canada|Chile|China|Custom|Czech republic|Germany|Denmark|Finland|France|Greece|Hungary|Israel|Italy|Korea|Kuwait|Middle East|Netherlands|Norway|New Zealand|Oceania|Peru|Poland|Portugal|Russia|Sweden|Slovakia|Spain|Turkey|Taiwan|United Kingdom" />
-    <setting label="ScreenScraper language" type="enum" id="scraper_screenscraper_language" default="0" values="English|Spanish|Japanese|Czech|Danish|German|Finnish|French|Hungarian|Italian|Korean|Dutch|Norwegian|Polish|Portuguese|Russian|Slovak|Swedish|Turkish|Chinese" />
-
                 <setting id="scraper_screenscraper_ssid" type="string" label="30101" help="">
                     <level>0</level>
                     <default></default>
@@ -29,18 +21,82 @@
                     </constraints>
                     <control type="edit" format="string">
                         <heading>30101</heading>
+                        <hidden>true</hidden>
                     </control>
                 </setting>
                 <setting id="scraper_screenscraper_region" type="integer" label="30103" help="">
-                    <level>1</level>
-                    <default>1</default>
+                    <level>0</level>
+                    <default>0</default>
                     <constraints>
                         <options>
-                            <option label="30911">0</option>
-                            <option label="30912">1</option>
-                            <option label="30913">2</option>
-                            <option label="30914">3</option>
-                            <option label="30915">4</option>
+                            <option label="30921">0</option>
+                            <option label="30922">1</option>
+                            <option label="30923">2</option>
+                            <option label="30924">3</option>
+                            <option label="30925">4</option>
+                            <option label="30926">5</option>
+                            <option label="30927">6</option>
+                            <option label="30928">7</option>
+                            <option label="30929">8</option>
+                            <option label="30930">9</option>
+                            <option label="30931">10</option>
+                            <option label="30932">11</option>
+                            <option label="30933">12</option>
+                            <option label="30934">13</option>
+                            <option label="30935">14</option>
+                            <option label="30936">15</option>
+                            <option label="30937">16</option>
+                            <option label="30938">17</option>
+                            <option label="30939">18</option>
+                            <option label="30940">19</option>
+                            <option label="30942">20</option>
+                            <option label="30943">21</option>
+                            <option label="30944">22</option>
+                            <option label="30945">23</option>
+                            <option label="30946">24</option>
+                            <option label="30947">25</option>
+                            <option label="30948">26</option>
+                            <option label="30949">27</option>
+                            <option label="30950">29</option>
+                            <option label="30951">30</option>
+                            <option label="30952">31</option>
+                            <option label="30953">32</option>
+                            <option label="30954">33</option>
+                            <option label="30955">34</option>
+                            <option label="30956">35</option>
+                            <option label="30957">36</option>
+                            <option label="30958">37</option>
+                            <option label="30959">38</option>
+                            <option label="30960">39</option>
+                        </options>
+                    </constraints>
+                    <control type="spinner" format="string"/>
+                </setting>
+                <setting id="scraper_screenscraper_language" type="integer" label="30104" help="">
+                    <level>0</level>
+                    <default>0</default>
+                    <constraints>
+                        <options>
+                            <option label="30961">0</option>
+                            <option label="30962">1</option>
+                            <option label="30963">2</option>
+                            <option label="30964">3</option>
+                            <option label="30965">4</option>
+                            <option label="30966">5</option>
+                            <option label="30967">6</option>
+                            <option label="30968">7</option>
+                            <option label="30969">8</option>
+                            <option label="30970">9</option>
+                            <option label="30971">10</option>
+                            <option label="30972">11</option>
+                            <option label="30973">12</option>
+                            <option label="30974">13</option>
+                            <option label="30975">14</option>
+                            <option label="30976">15</option>
+                            <option label="30977">16</option>
+                            <option label="30978">17</option>
+                            <option label="30979">18</option>
+                            <option label="30980">19</option>
                         </options>
                     </constraints>
                     <control type="spinner" format="string"/>
@@ -81,11 +137,11 @@
                 </setting>
                 <setting id="ael.scraper.supported_metadata" type="string" label="Metadata supported by this scraper" help="">
                     <level>4</level>
-                    <default></default>
+                    <default>title|year|genre|developer|nplayers|esrb|plot</default>
                 </setting>
                 <setting id="ael.scraper.supported_assets" type="string" label="Assets supported by this scraper" help="">
                     <level>4</level>
-                    <default>boxfront|clearlogo|fanart</default>
+                    <default>fanart|banner|snap|clearlogo|boxfront|boxback|3dbox|cartridge|map</default>
                 </setting>
                 <setting id="ael.scraper.friendlyname" type="string" label="Scraper friendlyname" help="">
                     <level>4</level>

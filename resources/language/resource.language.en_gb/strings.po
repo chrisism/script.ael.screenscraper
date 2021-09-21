@@ -68,3 +68,243 @@ msgstr "LOG ENUM"
 msgctxt "#30915"
 msgid "DEBUG"
 msgstr "LOG ENUM"
+
+msgctxt "#30921"
+msgid "World"
+msgstr "Regions"
+
+msgctxt "#30922"
+msgid "Europe"
+msgstr "Regions"
+
+msgctxt "#30923"
+msgid "USA"
+msgstr "Regions"
+
+msgctxt "#30924"
+msgid "Japan"
+msgstr "Regions"
+
+msgctxt "#30925"
+msgid "ScreenScraper"
+msgstr "Regions"
+
+msgctxt "#30926"
+msgid "American continent"
+msgstr "Regions"
+
+msgctxt "#30927"
+msgid "Asia"
+msgstr "Regions"
+
+msgctxt "#30928"
+msgid "Australia"
+msgstr "Regions"
+
+msgctxt "#30929"
+msgid "Bulgaria"
+msgstr "Regions"
+
+msgctxt "#30930"
+msgid "Brazil"
+msgstr "Regions"
+
+msgctxt "#30931"
+msgid "Canada"
+msgstr "Regions"
+
+msgctxt "#30932"
+msgid "Chile"
+msgstr "Regions"
+
+msgctxt "#30933"
+msgid "China"
+msgstr "Regions"
+
+msgctxt "#30934"
+msgid "Custom"
+msgstr "Regions"
+
+msgctxt "#30935"
+msgid "Czech republic"
+msgstr "Regions"
+
+msgctxt "#30936"
+msgid "Germany"
+msgstr "Regions"
+
+msgctxt "#30937"
+msgid "Denmark"
+msgstr "Regions"
+
+msgctxt "#30938"
+msgid "Finland"
+msgstr "Regions"
+
+msgctxt "#30939"
+msgid "France"
+msgstr "Regions"
+
+msgctxt "#30940"
+msgid "Greece"
+msgstr "Regions"
+
+msgctxt "#30941"
+msgid "Hungary"
+msgstr "Regions"
+
+msgctxt "#30942"
+msgid "Israel"
+msgstr "Regions"
+
+msgctxt "#30943"
+msgid "Italy"
+msgstr "Regions"
+
+msgctxt "#30944"
+msgid "Korea"
+msgstr "Regions"
+
+msgctxt "#30945"
+msgid "Kuwait"
+msgstr "Regions"
+
+msgctxt "#30946"
+msgid "Middle East"
+msgstr "Regions"
+
+msgctxt "#30947"
+msgid "Netherlands"
+msgstr "Regions"
+
+msgctxt "#30948"
+msgid "Norway"
+msgstr "Regions"
+
+msgctxt "#30949"
+msgid "New Zealand"
+msgstr "Regions"
+
+msgctxt "#30950"
+msgid "Oceania"
+msgstr "Regions"
+
+msgctxt "#30951"
+msgid "Peru"
+msgstr "Regions"
+
+msgctxt "#30952"
+msgid "Poland"
+msgstr "Regions"
+
+msgctxt "#30953"
+msgid "Portugal"
+msgstr "Regions"
+
+msgctxt "#30954"
+msgid "Russia"
+msgstr "Regions"
+
+msgctxt "#30955"
+msgid "Sweden"
+msgstr "Regions"
+
+msgctxt "#30956"
+msgid "Slovakia"
+msgstr "Regions"
+
+msgctxt "#30957"
+msgid "Spain"
+msgstr "Regions"
+
+msgctxt "#30958"
+msgid "Turkey"
+msgstr "Regions"
+
+msgctxt "#30959"
+msgid "Taiwan"
+msgstr "Regions"
+
+msgctxt "#30960"
+msgid "United Kingdom"
+msgstr "Regions"
+
+msgctxt "#30961"
+msgid "English"
+msgstr "Language"
+
+msgctxt "#30962"
+msgid "Spanish"
+msgstr "Language"
+
+msgctxt "#30963"
+msgid "Japanese"
+msgstr "Language"
+
+msgctxt "#30964"
+msgid "Czech"
+msgstr "Language"
+
+msgctxt "#30965"
+msgid "Danish"
+msgstr "Language"
+
+msgctxt "#30966"
+msgid "German"
+msgstr "Language"
+
+msgctxt "#30967"
+msgid "Finnish"
+msgstr "Language"
+
+msgctxt "#30968"
+msgid "French"
+msgstr "Language"
+
+msgctxt "#30969"
+msgid "Hungarian"
+msgstr "Language"
+
+msgctxt "#30970"
+msgid "Italian"
+msgstr "Language"
+
+msgctxt "#30971"
+msgid "Korean"
+msgstr "Language"
+
+msgctxt "#30972"
+msgid "Dutch"
+msgstr "Language"
+
+msgctxt "#30973"
+msgid "Norwegian"
+msgstr "Language"
+
+msgctxt "#30974"
+msgid "Polish"
+msgstr "Language"
+
+msgctxt "#30975"
+msgid "Portuguese"
+msgstr "Language"
+
+msgctxt "#30976"
+msgid "Russian"
+msgstr "Language"
+
+msgctxt "#30977"
+msgid "Slovak"
+msgstr "Language"
+
+msgctxt "#30978"
+msgid "Swedish"
+msgstr "Language"
+
+msgctxt "#30979"
+msgid "Turkish"
+msgstr "Language"
+
+msgctxt "#30980"
+msgid "Chinese"
+msgstr "Language"
