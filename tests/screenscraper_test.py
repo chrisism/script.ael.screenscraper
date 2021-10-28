@@ -48,7 +48,8 @@ scraper_screenscraper_sspass = '', # NEVER COMMIT THIS PASSWORD
 scraper_screenscraper_AEL_softname = 'AEL_0.9.8',
 scraper_screenscraper_region = 0, # Default World
 scraper_screenscraper_language = 0, # Default English
-
+scraper_screenscraper_user = '' # NEVER COMMIT
+scraper_screenscraper_pwd = '' # NEVER COMMIT
 class Test_screenscraper(unittest.TestCase):
     
     ROOT_DIR = ''
@@ -69,7 +70,7 @@ class Test_screenscraper(unittest.TestCase):
         print('TEST OUTPUT DIR: {}'.format(cls.TEST_OUTPUT_DIR))
         print('---------------------------------------------------------------------------')
     
-    @unittest.skip('You must have an account key to use this test')
+    #@unittest.skip('You must have an account key to use this test')
     @patch('resources.lib.scraper.settings.getSetting', autospec=True)
     def test_screenscraper_metadata(self, settings_mock:MagicMock): 
         
