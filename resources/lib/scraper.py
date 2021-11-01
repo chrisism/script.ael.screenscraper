@@ -965,7 +965,6 @@ class ScreenScraper(Scraper):
     #   In this case status_dic marks no error and return None.
     def _retrieve_URL_as_JSON(self, url, status_dic, retry=0):
         self._wait_for_API_request(2000)
-        logger.info("TEST " + url)
         page_data_raw, http_code = net.get_URL(url, self._clean_URL_for_log(url))
         self.last_http_call = datetime.now()
 

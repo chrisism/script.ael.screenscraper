@@ -43,20 +43,30 @@ games = {
 
 
 # --- ScreenScraper ---
-scraper_screenscraper_ssid = 'Wintermute0110',
-scraper_screenscraper_sspass = '', # NEVER COMMIT THIS PASSWORD
-scraper_screenscraper_AEL_softname = 'AEL_0.9.8',
-scraper_screenscraper_region = 0, # Default World
-scraper_screenscraper_language = 0, # Default English
-scraper_screenscraper_user = '' # NEVER COMMIT
-scraper_screenscraper_pwd = '' # NEVER COMMIT
+scraper_screenscraper_ssid = 'Wintermute0110'
+scraper_screenscraper_sspass = '' # NEVER COMMIT THIS PASSWORD
+scraper_screenscraper_AEL_softname = 'AEL_0.9.8'
+scraper_screenscraper_region = 0 # Default World
+scraper_screenscraper_language = 0 # Default English
+
+def get_setting(key:str):
+    if key == 'scraper_cache_dir': return Test_screenscraper.TEST_OUTPUT_DIR
+    if key == 'scraper_screenscraper_sspass': return scraper_screenscraper_sspass 
+    if key == 'scraper_screenscraper_ssid': return scraper_screenscraper_ssid 
+    if key == 'scraper_screenscraper_AEL_softname': return scraper_screenscraper_AEL_softname 
+    return ''
+
+def get_setting_int(key:str):
+    if key == 'scraper_screenscraper_region': return scraper_screenscraper_region
+    if key == 'scraper_screenscraper_language': return scraper_screenscraper_language 
+    return 0
 class Test_screenscraper(unittest.TestCase):
     
     ROOT_DIR = ''
     TEST_DIR = ''
     TEST_ASSETS_DIR = ''
     TEST_OUTPUT_DIR = ''
-
+    
     @classmethod
     def setUpClass(cls):        
         cls.TEST_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -71,21 +81,19 @@ class Test_screenscraper(unittest.TestCase):
         print('---------------------------------------------------------------------------')
     
     #@unittest.skip('You must have an account key to use this test')
-    @patch('resources.lib.scraper.settings.getSetting', autospec=True)
-    def test_screenscraper_metadata(self, settings_mock:MagicMock): 
+    @patch('resources.lib.scraper.settings.getSettingAsInt', autospec=True, side_effect=get_setting_int)
+    @patch('resources.lib.scraper.settings.getSetting', autospec=True, side_effect=get_setting)
+    def test_screenscraper_metadata(self, settings_mock, settingsint_mock): 
         
-        settings_mock.side_effect = lambda key: scraper_screenscraper_ssid if key == 'scraper_screenscraper_ssid' else ''  
-        settings_mock.side_effect = lambda key: scraper_screenscraper_sspass if key == 'scraper_screenscraper_sspass' else ''  
-        settings_mock.side_effect = lambda key: scraper_screenscraper_AEL_softname if key == 'scraper_screenscraper_AEL_softname' else ''  
-        settings_mock.side_effect = lambda key: scraper_screenscraper_region if key == 'scraper_screenscraper_region' else ''  
-        settings_mock.side_effect = lambda key: scraper_screenscraper_language if key == 'scraper_screenscraper_language' else ''  
+        if not os.path.exists(self.TEST_OUTPUT_DIR):
+            os.makedirs(self.TEST_OUTPUT_DIR)
         
         # --- main ---------------------------------------------------------------------------------------
         print('*** Fetching candidate game list ********************************************************')
         # --- Create scraper object ---
         scraper_obj = ScreenScraper()
         scraper_obj.set_verbose_mode(False)
-        scraper_obj.set_debug_file_dump(True, os.path.join(os.path.dirname(__file__), 'assets'))
+        scraper_obj.set_debug_file_dump(True, self.TEST_OUTPUT_DIR)
         scraper_obj.set_debug_checksums(True,
             '414FA339', '9db5682a4d778ca2cb79580bdb67083f',
             '48c98f7e5a6e736d790ab740dfc3f51a61abe2b5', 123456)
@@ -129,22 +137,20 @@ class Test_screenscraper(unittest.TestCase):
         scraper_obj.flush_disk_cache()
 
     @unittest.skip('You must have an account key to use this test')
-    @patch('resources.lib.scraper.settings.getSetting', autospec=True)
-    def test_screenscraper_assets(self, settings_mock:MagicMock): 
+    @patch('resources.lib.scraper.settings.getSettingAsInt', autospec=True, side_effect=get_setting_int)
+    @patch('resources.lib.scraper.settings.getSetting', autospec=True, side_effect=get_setting)
+    def test_screenscraper_assets(self, settings_mock, settingsint_mock): 
         
-        settings_mock.side_effect = lambda key: scraper_screenscraper_ssid if key == 'scraper_screenscraper_ssid' else ''  
-        settings_mock.side_effect = lambda key: scraper_screenscraper_sspass if key == 'scraper_screenscraper_sspass' else ''  
-        settings_mock.side_effect = lambda key: scraper_screenscraper_AEL_softname if key == 'scraper_screenscraper_AEL_softname' else ''  
-        settings_mock.side_effect = lambda key: scraper_screenscraper_region if key == 'scraper_screenscraper_region' else ''  
-        settings_mock.side_effect = lambda key: scraper_screenscraper_language if key == 'scraper_screenscraper_language' else ''  
-
+        if not os.path.exists(self.TEST_OUTPUT_DIR):
+            os.makedirs(self.TEST_OUTPUT_DIR)
+        
         # --- main ---------------------------------------------------------------------------------------
         print('*** Fetching candidate game list ********************************************************')
         
         # --- Create scraper object ---
         scraper_obj = ScreenScraper()
         scraper_obj.set_verbose_mode(False)
-        scraper_obj.set_debug_file_dump(True, os.path.join(os.path.dirname(__file__), 'assets'))
+        scraper_obj.set_debug_file_dump(True, self.TEST_OUTPUT_DIR)
         scraper_obj.set_debug_checksums(True, '414FA339', '9db5682a4d778ca2cb79580bdb67083f',
             '48c98f7e5a6e736d790ab740dfc3f51a61abe2b5', 123456)
         status_dic = kodi.new_status_dic('Scraper test was OK')
