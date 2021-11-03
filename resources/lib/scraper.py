@@ -31,6 +31,7 @@ from urllib.parse import quote_plus, quote
 from ael import constants, platforms, settings
 from ael.utils import io, net, kodi
 from ael.scrapers import Scraper
+from ael.api import ROMObj
 
 logger = logging.getLogger(__name__)
 
@@ -313,9 +314,9 @@ class ScreenScraper(Scraper):
     # ScreenScraper uses the candidates and internal cache. It does not use the
     # medatada and asset caches at all because the metadata and assets are generated
     # with the internal cache.
-    # Search term is always None for this scraper. rom_FN and ROM checksums are used
+    # Search term is always None for this scraper. Rom file and ROM checksums are used
     # to search ROMs.
-    def get_candidates(self, search_term:str, rom_FN:io.FileName, rom_checksums_FN:io.FileName, platform, status_dic):
+    def get_candidates(self, search_term:str, rom:ROMObj, platform, status_dic):
         # If the scraper is disabled return None and do not mark error in status_dic.
         # Candidate will not be introduced in the disk cache and will be scraped again.
         if self.scraper_disabled:
@@ -323,9 +324,13 @@ class ScreenScraper(Scraper):
             return None
 
         # Prepare data for scraping.
-        rombase = rom_FN.getBase()
+        rom_FN = rom.get_file()
+        
+        if rom_FN is None: #or rom_checksums_FN is None:
+            logger.warning('Trying to scrape a non existing or virtual ROM file with Screenscraper')
+            return None
+        
         rompath = rom_FN.getPath()
-        romchecksums_path = rom_checksums_FN.getPath() if rom_checksums_FN is not None else None
         scraper_platform = convert_AEL_platform_to_ScreenScraper(platform)
 
         # --- Get candidates ---
@@ -333,11 +338,11 @@ class ScreenScraper(Scraper):
         # metadata, artwork, etc. jeuInfos.php returns one game or nothing at all.
         # ScreenScraper returns only one game or nothing at all.
         logger.debug('ScreenScraper.get_candidates() rompath      "{}"'.format(rompath))
-        logger.debug('ScreenScraper.get_candidates() romchecksums "{}"'.format(romchecksums_path))
+        #logger.debug('ScreenScraper.get_candidates() romchecksums "{}"'.format(romchecksums_path))
         logger.debug('ScreenScraper.get_candidates() AEL platform "{}"'.format(platform))
         logger.debug('ScreenScraper.get_candidates() SS platform  "{}"'.format(scraper_platform))
-        candidate_list = self._search_candidates_jeuInfos(
-            rom_FN, rom_checksums_FN, platform, scraper_platform, status_dic)
+        candidate_list = self._search_candidates_jeuInfos(rom_FN, platform, scraper_platform, status_dic)
+        
         # _search_candidates_jeuRecherche() does not work for get_metadata() and get_assets()
         # because jeu_dic is not introduced in the internal cache.
         # candidate_list = self._search_candidates_jeuRecherche(
@@ -525,11 +530,7 @@ class ScreenScraper(Scraper):
         self._dump_json_debug('ScreenScraper_gameSearch.json', json_data)
 
     # Call to ScreenScraper jeuInfos.php.
-    def _search_candidates_jeuInfos(self, rom_FN, rom_checksums_FN, platform, scraper_platform, status_dic):
-        if rom_FN is None or rom_checksums_FN is None:
-            logger.warning('Trying to scrape a non existing or virtual ROM file with Screenscraper')
-            return None
-        
+    def _search_candidates_jeuInfos(self, rom_FN:io.FileName, platform, scraper_platform, status_dic):
         # --- Test data ---
         # * Example from ScreenScraper API info page.
         #   #crc=50ABC90A&systemeid=1&romtype=rom&romnom=Sonic%20The%20Hedgehog%202%20(World).zip&romtaille=749652
@@ -564,7 +565,7 @@ class ScreenScraper(Scraper):
                 'size' : self.debug_size, 'rom_name' : rom_FN.getBase(),
             }
         else:
-            checksums = self._get_SS_checksum(rom_checksums_FN)
+            checksums = self._get_SS_checksum(rom_FN)
             if checksums is None:
                 status_dic['status'] = False
                 status_dic['msg'] = 'Error computing file checksums.'
