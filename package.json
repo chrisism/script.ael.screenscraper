@@ -1,6 +1,6 @@
 {
     "name": "script.ael.screenscraper",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "scripts": {
         "build": "addon build",
         "build-alpha": "addon versioning --semver prerelease --tag alpha && npm run build",

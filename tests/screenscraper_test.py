@@ -19,6 +19,7 @@ logger = logging.getLogger(__name__)
 
 from resources.lib.scraper import ScreenScraper
 from ael.utils import kodi, io
+from ael.api import ROMObj
 from ael import constants
 
 # --- Test data -----------------------------------------------------------------------------------
@@ -113,12 +114,16 @@ class Test_screenscraper(unittest.TestCase):
 
         # --- Get candidates, print them and set first candidate ---
         rom_FN = io.FileName(rombase)
-        rom_checksums_FN = io.FileName(rombase)
-        if scraper_obj.check_candidates_cache(rom_FN, platform):
-            print('>>>> Game "{}" "{}" in disk cache.'.format(rom_FN.getBase(), platform))
+        rom = ROMObj({
+            'platform': platform,
+            'scanned_data': { 'file': rombase, 'identifier': rom_FN.getBaseNoExt() }
+        })
+            
+        if scraper_obj.check_candidates_cache(rom.get_identifier(), platform):
+            print('>>>> Game "{}" "{}" in disk cache.'.format(rom.get_identifier(), platform))
         else:
-            print('>>>> Game "{}" "{}" not in disk cache.'.format(rom_FN.getBase(), platform))
-        candidate_list = scraper_obj.get_candidates(search_term, rom_FN, rom_checksums_FN, platform, status_dic)
+            print('>>>> Game "{}" "{}" not in disk cache.'.format(rom.get_identifier(), platform))
+        candidate_list = scraper_obj.get_candidates(search_term, rom, platform, status_dic)
         # pprint.pprint(candidate_list)
         self.assertTrue(status_dic['status'], 'Status error "{}"'.format(status_dic['msg']))
         self.assertIsNotNone(candidate_list, 'Error/exception in get_candidates()')
@@ -127,7 +132,7 @@ class Test_screenscraper(unittest.TestCase):
         for candidate in candidate_list:
             print(candidate)
             
-        scraper_obj.set_candidate(rom_FN, platform, candidate_list[0])
+        scraper_obj.set_candidate(rom.get_identifier(), platform, candidate_list[0])
 
         # --- Print metadata of first candidate ----------------------------------------------------------
         print('*** Fetching game metadata **************************************************************')
@@ -166,12 +171,16 @@ class Test_screenscraper(unittest.TestCase):
 
         # --- Get candidates, print them and set first candidate ---
         rom_FN = io.FileName(rombase)
-        rom_checksums_FN = io.FileName(rombase)
-        if scraper_obj.check_candidates_cache(rom_FN, platform):
-            print('>>>> Game "{}" "{}" in disk cache.'.format(rom_FN.getBase(), platform))
+        rom = ROMObj({
+            'platform': platform,
+            'scanned_data': { 'file': rombase, 'identifier': rom_FN.getBaseNoExt() }
+        })
+        
+        if scraper_obj.check_candidates_cache(rom.get_identifier(), platform):
+            print('>>>> Game "{}" "{}" in disk cache.'.format(rom.get_identifier(), platform))
         else:
-            print('>>>> Game "{}" "{}" not in disk cache.'.format(rom_FN.getBase(), platform))
-        candidate_list = scraper_obj.get_candidates(search_term, rom_FN, rom_checksums_FN, platform, status_dic)
+            print('>>>> Game "{}" "{}" not in disk cache.'.format(rom.get_identifier(), platform))
+        candidate_list = scraper_obj.get_candidates(search_term, rom, platform, status_dic)
         # pprint.pprint(candidate_list)
         self.assertTrue(status_dic['status'], 'Status error "{}"'.format(status_dic['msg']))
         self.assertIsNotNone(candidate_list, 'Error/exception in get_candidates()')
@@ -180,7 +189,7 @@ class Test_screenscraper(unittest.TestCase):
         for candidate in candidate_list:
             print(candidate)
             
-        scraper_obj.set_candidate(rom_FN, platform, candidate_list[0])
+        scraper_obj.set_candidate(rom.get_identifier(), platform, candidate_list[0])
 
         # --- Print list of assets found -----------------------------------------------------------------
         print('*** Fetching game assets ****************************************************************')

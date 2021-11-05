@@ -324,7 +324,7 @@ class ScreenScraper(Scraper):
             return None
 
         # Prepare data for scraping.
-        rom_FN = rom.get_file()
+        rom_FN = rom.get_scanned_data_element_as_file('file')
         
         if rom_FN is None: #or rom_checksums_FN is None:
             logger.warning('Trying to scrape a non existing or virtual ROM file with Screenscraper')
