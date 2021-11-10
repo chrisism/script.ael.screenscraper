@@ -81,7 +81,7 @@ class Test_screenscraper(unittest.TestCase):
         print('TEST OUTPUT DIR: {}'.format(cls.TEST_OUTPUT_DIR))
         print('---------------------------------------------------------------------------')
     
-    #@unittest.skip('You must have an account key to use this test')
+    @unittest.skip('You must have an account key to use this test')
     @patch('resources.lib.scraper.settings.getSettingAsInt', autospec=True, side_effect=get_setting_int)
     @patch('resources.lib.scraper.settings.getSetting', autospec=True, side_effect=get_setting)
     def test_screenscraper_metadata(self, settings_mock, settingsint_mock): 
