@@ -27,11 +27,11 @@ from datetime import datetime, timedelta
 
 from urllib.parse import quote_plus, quote
 
-# --- AEL packages ---
-from ael import constants, platforms, settings
-from ael.utils import io, net, kodi
-from ael.scrapers import Scraper
-from ael.api import ROMObj
+# --- AKL packages ---
+from akl import constants, platforms, settings
+from akl.utils import io, net, kodi
+from akl.scrapers import Scraper
+from akl.api import ROMObj
 
 logger = logging.getLogger(__name__)
 
@@ -133,7 +133,7 @@ class ScreenScraper(Scraper):
         # ASSET_MANUAL_ID,
         # ASSET_TRAILER_ID,
     ]
-    # Unsupported AEL types:
+    # Unsupported AKL types:
     # manuel (Manual)
     # screenmarquee (Marquee with lower aspec ratio, more squared than rectangular).
     # box-2D-side (Box spine)
@@ -184,7 +184,7 @@ class ScreenScraper(Scraper):
         'fr',  # France
         'gr',  # Greece
         'hu',  # Hungary
-        'il',  # Israel
+        'il',  # Israkl
         'it',  # Italy
         'kr',  # Korea
         'kw',  # Kuwait
@@ -253,7 +253,7 @@ class ScreenScraper(Scraper):
         # --- This scraper settings ---
         self.dev_id       = 'V2ludGVybXV0ZTAxMTA='
         self.dev_pass     = 'VDlwU3J6akZCbWZRbWM4Yg=='
-        self.softname     = settings.getSetting('scraper_screenscraper_AEL_softname')
+        self.softname     = settings.getSetting('scraper_screenscraper_AKL_softname')
         self.ssid         = settings.getSetting('scraper_screenscraper_ssid')
         self.sspassword   = settings.getSetting('scraper_screenscraper_sspass')
         self.region_idx   = settings.getSettingAsInt('scraper_screenscraper_region')
@@ -305,9 +305,9 @@ class ScreenScraper(Scraper):
         status_dic['status'] = False
         status_dic['dialog'] = kodi.KODI_MESSAGE_DIALOG
         status_dic['msg'] = (
-            'AEL requires your ScreenScraper user name and password. '
+            'AKL requires your ScreenScraper user name and password. '
             'Create a user account in https://www.screenscraper.fr/ '
-            'and set you user name and password in AEL addon settings.'
+            'and set you user name and password in AKL addon settings.'
         )
 
     # _search_candidates_jeuInfos() uses the internal cache.
@@ -331,7 +331,7 @@ class ScreenScraper(Scraper):
             return None
         
         rompath = rom_FN.getPath()
-        scraper_platform = convert_AEL_platform_to_ScreenScraper(platform)
+        scraper_platform = convert_AKL_platform_to_ScreenScraper(platform)
 
         # --- Get candidates ---
         # ScreenScraper jeuInfos.php returns absolutely everything about a single ROM, including
@@ -339,7 +339,7 @@ class ScreenScraper(Scraper):
         # ScreenScraper returns only one game or nothing at all.
         logger.debug('ScreenScraper.get_candidates() rompath      "{}"'.format(rompath))
         #logger.debug('ScreenScraper.get_candidates() romchecksums "{}"'.format(romchecksums_path))
-        logger.debug('ScreenScraper.get_candidates() AEL platform "{}"'.format(platform))
+        logger.debug('ScreenScraper.get_candidates() AKL platform "{}"'.format(platform))
         logger.debug('ScreenScraper.get_candidates() SS platform  "{}"'.format(scraper_platform))
         candidate_list = self._search_candidates_jeuInfos(rom_FN, platform, scraper_platform, status_dic)
         
@@ -517,7 +517,7 @@ class ScreenScraper(Scraper):
     # Debug test function for jeuRecherche.php (game search).
     def debug_game_search(self, search_term, rombase_noext, platform, status_dic):
         logger.debug('ScreenScraper.debug_game_search() Calling jeuRecherche.php...')
-        scraper_platform = convert_AEL_platform_to_ScreenScraper(platform)
+        scraper_platform = convert_AKL_platform_to_ScreenScraper(platform)
         system_id = scraper_platform
         recherche = quote(rombase_noext)
         logger.debug('ScreenScraper.debug_game_search() system_id  "{}"'.format(system_id))
@@ -571,7 +571,7 @@ class ScreenScraper(Scraper):
                 status_dic['msg'] = 'Error computing file checksums.'
                 return None
 
-        # --- Actual data for scraping in AEL ---
+        # --- Actual data for scraping in AKL ---
         # Change rom_type for ISO-based platforms
         rom_type = 'iso' if platform in ISO_platform_set else 'rom'
         system_id = scraper_platform
@@ -637,9 +637,9 @@ class ScreenScraper(Scraper):
     # Call to ScreenScraper jeuRecherche.php.
     # Not used at the moment, just here for research.
     def _search_candidates_jeuRecherche(self, search_term, rombase_noext, platform, scraper_platform, status_dic):
-        # --- Actual data for scraping in AEL ---
+        # --- Actual data for scraping in AKL ---
         logger.debug('ScreenScraper._search_candidates_jeuRecherche() Calling jeuRecherche.php...')
-        scraper_platform = convert_AEL_platform_to_ScreenScraper(platform)
+        scraper_platform = convert_AKL_platform_to_ScreenScraper(platform)
         system_id = scraper_platform
         recherche = quote_plus(rombase_noext)
         logger.debug('ScreenScraper._search_candidates_jeuRecherche() system_id  "{}"'.format(system_id))
@@ -1068,28 +1068,28 @@ class ScreenScraper(Scraper):
         
 
 # ------------------------------------------------------------------------------------------------
-# Screenscraper supported platforms mapped to AEL platforms.
+# Screenscraper supported platforms mapped to AKL platforms.
 # ------------------------------------------------------------------------------------------------
 DEFAULT_PLAT_SCREENSCRAPER = 0
-def convert_AEL_platform_to_ScreenScraper(platform_long_name):
-    matching_platform = platforms.get_AEL_platform(platform_long_name)
-    if matching_platform.compact_name in AEL_compact_platform_Screenscraper_mapping:
-        return AEL_compact_platform_Screenscraper_mapping[matching_platform.compact_name]
+def convert_AKL_platform_to_ScreenScraper(platform_long_name):
+    matching_platform = platforms.get_AKL_platform(platform_long_name)
+    if matching_platform.compact_name in AKL_compact_platform_Screenscraper_mapping:
+        return AKL_compact_platform_Screenscraper_mapping[matching_platform.compact_name]
     
-    if matching_platform.aliasof is not None and matching_platform.aliasof in AEL_compact_platform_Screenscraper_mapping:
-        return AEL_compact_platform_Screenscraper_mapping[matching_platform.aliasof]
+    if matching_platform.aliasof is not None and matching_platform.aliasof in AKL_compact_platform_Screenscraper_mapping:
+        return AKL_compact_platform_Screenscraper_mapping[matching_platform.aliasof]
         
     # Platform not found.
     return DEFAULT_PLAT_SCREENSCRAPER
 
-def convert_Screenscraper_platform_to_AEL_platform(self, screenscraper_platform):
-    if screenscraper_platform in Screenscraper_AEL_compact_platform_mapping:
-        platform_compact_name = Screenscraper_AEL_compact_platform_mapping[screenscraper_platform]
-        return platforms.get_AEL_platform_by_compact(platform_compact_name)
+def convert_Screenscraper_platform_to_AKL_platform(self, screenscraper_platform):
+    if screenscraper_platform in Screenscraper_AKL_compact_platform_mapping:
+        platform_compact_name = Screenscraper_AKL_compact_platform_mapping[screenscraper_platform]
+        return platforms.get_AKL_platform_by_compact(platform_compact_name)
         
-    return platforms.get_AEL_platform_by_compact(platforms.PLATFORM_UNKNOWN_COMPACT)
+    return platforms.get_AKL_platform_by_compact(platforms.PLATFORM_UNKNOWN_COMPACT)
 
-AEL_compact_platform_Screenscraper_mapping = {
+AKL_compact_platform_Screenscraper_mapping = {
     '3do': 29,
     'cpc': 65,
     'a2600': 26,
@@ -1180,6 +1180,6 @@ AEL_compact_platform_Screenscraper_mapping = {
     'supervision': 207
 }
 
-Screenscraper_AEL_compact_platform_mapping = {}
-for key, value in AEL_compact_platform_Screenscraper_mapping.items():
-    Screenscraper_AEL_compact_platform_mapping[value] = key        
+Screenscraper_AKL_compact_platform_mapping = {}
+for key, value in AKL_compact_platform_Screenscraper_mapping.items():
+    Screenscraper_AKL_compact_platform_mapping[value] = key        

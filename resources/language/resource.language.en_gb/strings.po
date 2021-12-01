@@ -1,6 +1,6 @@
 # Kodi Media Center language file
-# Addon Name: Screenscraper scraper for AEL
-# Addon id: script.ael.screenscraper
+# Addon Name: Screenscraper scraper for AKL
+# Addon id: script.akl.screenscraper
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -154,7 +154,7 @@ msgid "Hungary"
 msgstr "Regions"
 
 msgctxt "#30942"
-msgid "Israel"
+msgid "Israkl"
 msgstr "Regions"
 
 msgctxt "#30943"

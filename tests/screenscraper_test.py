@@ -1,7 +1,7 @@
 #!/usr/bin/python -B
 # -*- coding: utf-8 -*-
 #
-# Test AEL ScreenScraper asset scraper.
+# Test AKL ScreenScraper asset scraper.
 # This testing file is intended for scraper development and file dumping.
 #
 
@@ -18,9 +18,9 @@ logging.basicConfig(format = '%(asctime)s %(module)s %(levelname)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 from resources.lib.scraper import ScreenScraper
-from ael.utils import kodi, io
-from ael.api import ROMObj
-from ael import constants
+from akl.utils import kodi, io
+from akl.api import ROMObj
+from akl import constants
 
 # --- Test data -----------------------------------------------------------------------------------
 games = {
@@ -46,7 +46,7 @@ games = {
 # --- ScreenScraper ---
 scraper_screenscraper_ssid = 'Wintermute0110'
 scraper_screenscraper_sspass = '' # NEVER COMMIT THIS PASSWORD
-scraper_screenscraper_AEL_softname = 'AEL_0.9.8'
+scraper_screenscraper_AKL_softname = 'AEL_0.9.8'
 scraper_screenscraper_region = 0 # Default World
 scraper_screenscraper_language = 0 # Default English
 
@@ -54,7 +54,7 @@ def get_setting(key:str):
     if key == 'scraper_cache_dir': return Test_screenscraper.TEST_OUTPUT_DIR
     if key == 'scraper_screenscraper_sspass': return scraper_screenscraper_sspass 
     if key == 'scraper_screenscraper_ssid': return scraper_screenscraper_ssid 
-    if key == 'scraper_screenscraper_AEL_softname': return scraper_screenscraper_AEL_softname 
+    if key == 'scraper_screenscraper_AKL_softname': return scraper_screenscraper_AEL_softname 
     return ''
 
 def get_setting_int(key:str):

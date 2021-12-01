@@ -23,7 +23,7 @@ ID     Shortname  Parent  English
 45     fr         48      France            
 3892   gr         48      Greece            
 3821   hu         48      Hungary           
-3827   il         3826    Israel            
+3827   il         3826    Israkl            
 118    it         48      Italy             
 58     kr         114     Korea             
 3832   kw         3826    Kuwait            

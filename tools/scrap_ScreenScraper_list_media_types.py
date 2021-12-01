@@ -19,8 +19,8 @@ logging.basicConfig(format = '%(asctime)s %(module)s %(levelname)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 from resources.lib.scraper import ScreenScraper
-from ael.utils import kodi, text
-from ael import constants
+from akl.utils import kodi, text
+from akl import constants
 
 # --- Test data -----------------------------------------------------------------------------------
 games = {

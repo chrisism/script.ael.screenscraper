@@ -20,7 +20,7 @@
         'fr',  # France
         'gr',  # Greece
         'hu',  # Hungary
-        'il',  # Israel
+        'il',  # Israkl
         'it',  # Italy
         'kr',  # Korea
         'kw',  # Kuwait
