@@ -44,8 +44,8 @@ games = {
 
 
 # --- ScreenScraper ---
-scraper_screenscraper_ssid = 'Wintermute0110'
-scraper_screenscraper_sspass = '' # NEVER COMMIT THIS PASSWORD
+scraper_screenscraper_ssid = os.getenv('SCREENSCRAPER_SSID')
+scraper_screenscraper_sspass = os.getenv('SCREENSCRAPER_PASS')
 scraper_screenscraper_AKL_softname = 'AKL_0.9.8'
 scraper_screenscraper_region = 0 # Default World
 scraper_screenscraper_language = 0 # Default English
@@ -80,14 +80,14 @@ class Test_screenscraper(unittest.TestCase):
         print('TEST ASSETS DIR: {}'.format(cls.TEST_ASSETS_DIR))
         print('TEST OUTPUT DIR: {}'.format(cls.TEST_OUTPUT_DIR))
         print('---------------------------------------------------------------------------')
+        
+        if not os.path.exists(cls.TEST_OUTPUT_DIR):
+            os.makedirs(cls.TEST_OUTPUT_DIR)
     
-    @unittest.skip('You must have an account key to use this test')
+    #@unittest.skip('You must have an account key to use this test')
     @patch('resources.lib.scraper.settings.getSettingAsInt', autospec=True, side_effect=get_setting_int)
     @patch('resources.lib.scraper.settings.getSetting', autospec=True, side_effect=get_setting)
     def test_screenscraper_metadata(self, settings_mock, settingsint_mock): 
-        
-        if not os.path.exists(self.TEST_OUTPUT_DIR):
-            os.makedirs(self.TEST_OUTPUT_DIR)
         
         # --- main ---------------------------------------------------------------------------------------
         print('*** Fetching candidate game list ********************************************************')
@@ -141,7 +141,7 @@ class Test_screenscraper(unittest.TestCase):
         print(metadata)
         scraper_obj.flush_disk_cache()
 
-    @unittest.skip('You must have an account key to use this test')
+    #@unittest.skip('You must have an account key to use this test')
     @patch('resources.lib.scraper.settings.getSettingAsInt', autospec=True, side_effect=get_setting_int)
     @patch('resources.lib.scraper.settings.getSetting', autospec=True, side_effect=get_setting)
     def test_screenscraper_assets(self, settings_mock, settingsint_mock): 
