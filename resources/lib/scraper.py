@@ -739,9 +739,11 @@ class ScreenScraper(Scraper):
 
     # Do not working at the moment.
     def _parse_meta_esrb(self, jeu_dic):
-        # if 'classifications' in jeu_dic and 'ESRB' in jeu_dic['classifications']:
-        #     return jeu_dic['classifications']['ESRB']
-
+        if 'classifications' in jeu_dic:
+            for classification in jeu_dic['classifications']:
+                if classification['type'] == 'ESRB':
+                    return classification['text']
+                    
         return constants.DEFAULT_META_ESRB
 
     def _parse_meta_plot(self, jeu_dic):
