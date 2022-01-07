@@ -729,13 +729,21 @@ class ScreenScraper(Scraper):
         return constants.DEFAULT_META_DEVELOPER
 
     def _parse_meta_nplayers(self, jeu_dic):
+        nplayers_str = None
         # EAFP Easier to ask for forgiveness than permission.
         try:
-            return jeu_dic['joueurs']['text']
+            nplayers_str:str = jeu_dic['joueurs']['text']
         except KeyError:
             pass
+        
+        if nplayers_str is None: return constants.DEFAULT_META_DEVELOPER
 
-        return constants.DEFAULT_META_NPLAYERS
+        if nplayers_str.isnumeric():
+            return nplayers_str
+
+        match = re.search('\d+\\-(\d+)', nplayers_str)
+        nplayers_str = match.group(1)
+        return nplayers_str
 
     # Do not working at the moment.
     def _parse_meta_esrb(self, jeu_dic):
