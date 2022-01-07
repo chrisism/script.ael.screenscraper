@@ -982,12 +982,23 @@ class ScreenScraper(Scraper):
             # Number of requests limit, wait at least 2 minutes. Increments with every retry.
             amount_seconds = 120*(retry+1)
             wait_till_time = datetime.now() + timedelta(seconds=amount_seconds)
-            kodi.dialog_OK('You\'ve exceeded the max rate limit.', 
-                           'Respecting the website and we wait at least till {}.'.format(wait_till_time))
-            self._wait_for_API_request(amount_seconds*1000)
-            # waited long enough? Try again
-            retry_after_wait = retry + 1
-            return self._retrieve_URL_as_JSON(url, status_dic, retry_after_wait)
+            msg = [
+                    'You\'ve exceeded the max rate limit.'
+                     f'Respect the website and wait at least till {wait_till_time}.'
+                     'Want to stop scraping now instead?'
+                ]
+            auto_timer_ms = amount_seconds * 1000
+            if not kodi.dialog_yesno_timer('\n'.join(msg), timer_ms=auto_timer_ms):
+                amount_seconds = (datetime.now() - wait_till_time).total_seconds()
+                self._wait_for_API_request(amount_seconds*1000)
+                # waited long enough? Try again
+                retry_after_wait = retry + 1
+                return self._retrieve_URL_as_JSON(url, status_dic, retry_after_wait)
+            else:
+                self.scraper_disabled = True
+                status_dic['status'] = False
+                status_dic['dialog'] = kodi.KODI_MESSAGE_CANCEL
+                return None
         elif http_code == 404:
             # Code 404 in SS means the ROM was not found. Return None but do not mark
             # error in status_dic.
