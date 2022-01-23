@@ -270,7 +270,7 @@ class ScreenScraper(Scraper):
         self.user_language = ScreenScraper.language_list[self.language_idx]
         logger.debug('ScreenScraper.__init__() User preferred language "{}"'.format(self.user_language))
 
-        cache_dir = settings.getSetting('scraper_cache_dir')
+        cache_dir = settings.getSettingAsFilePath('scraper_cache_dir')
         super(ScreenScraper, self).__init__(cache_dir)
 
     # --- Base class abstract methods ------------------------------------------------------------
