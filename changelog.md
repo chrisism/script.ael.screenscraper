@@ -1,0 +1,1 @@
+The initial release of Screenscraper plugin for the AKL fork.
