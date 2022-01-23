@@ -5,7 +5,7 @@ Screenscraper plugin for AKL. This plugin can be used to scrape metadata and ass
 | Release | Status |
 |----|----|
 | Stable |[![Build Status](https://dev.azure.com/jnpro/AKL/_apis/build/status/script.akl.screenscraper?branchName=main)](https://dev.azure.com/jnpro/AKL/_build/latest?definitionId=11&branchName=main) |
-| Beta | [![Build Status](https://dev.azure.com/jnpro/AKL/_apis/build/status/script.akl.screenscraper?branchName=release/1.1.0)](https://dev.azure.com/jnpro/AKL/_build/latest?definitionId=11&branchName=release/1.1.0) |
+| Beta | [![Build Status](https://dev.azure.com/jnpro/AKL/_apis/build/status/script.akl.screenscraper?branchName=release/1.0.0)](https://dev.azure.com/jnpro/AKL/_build/latest?definitionId=11&branchName=release/1.0.0) |
 | Unstable | [![Build Status](https://dev.azure.com/jnpro/AKL/_apis/build/status/script.akl.screenscraper?branchName=dev)](https://dev.azure.com/jnpro/AKL/_build/latest?definitionId=11&branchName=dev) |
 
 ### Kodi forum thread ###
