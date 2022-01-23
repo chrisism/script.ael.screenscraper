@@ -84,7 +84,7 @@ class Test_screenscraper(unittest.TestCase):
         if not os.path.exists(cls.TEST_OUTPUT_DIR):
             os.makedirs(cls.TEST_OUTPUT_DIR)
     
-    #@unittest.skip('You must have an account key to use this test')
+    @unittest.skip('You must have an account key to use this test')
     @patch('resources.lib.scraper.settings.getSettingAsInt', autospec=True, side_effect=get_setting_int)
     @patch('resources.lib.scraper.settings.getSetting', autospec=True, side_effect=get_setting)
     def test_screenscraper_metadata(self, settings_mock, settingsint_mock): 
@@ -141,7 +141,7 @@ class Test_screenscraper(unittest.TestCase):
         print(metadata)
         scraper_obj.flush_disk_cache()
 
-    #@unittest.skip('You must have an account key to use this test')
+    @unittest.skip('You must have an account key to use this test')
     @patch('resources.lib.scraper.settings.getSettingAsInt', autospec=True, side_effect=get_setting_int)
     @patch('resources.lib.scraper.settings.getSetting', autospec=True, side_effect=get_setting)
     def test_screenscraper_assets(self, settings_mock, settingsint_mock): 
