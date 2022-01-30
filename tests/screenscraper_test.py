@@ -1,7 +1,7 @@
 #!/usr/bin/python -B
 # -*- coding: utf-8 -*-
 #
-# Test AEL ScreenScraper asset scraper.
+# Test AKL ScreenScraper asset scraper.
 # This testing file is intended for scraper development and file dumping.
 #
 
@@ -18,9 +18,9 @@ logging.basicConfig(format = '%(asctime)s %(module)s %(levelname)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 from resources.lib.scraper import ScreenScraper
-from ael.utils import kodi, io
-from ael.api import ROMObj
-from ael import constants
+from akl.utils import kodi, io
+from akl.api import ROMObj
+from akl import constants
 
 # --- Test data -----------------------------------------------------------------------------------
 games = {
@@ -44,9 +44,9 @@ games = {
 
 
 # --- ScreenScraper ---
-scraper_screenscraper_ssid = 'Wintermute0110'
-scraper_screenscraper_sspass = '' # NEVER COMMIT THIS PASSWORD
-scraper_screenscraper_AEL_softname = 'AEL_0.9.8'
+scraper_screenscraper_ssid = os.getenv('SCREENSCRAPER_SSID')
+scraper_screenscraper_sspass = os.getenv('SCREENSCRAPER_PASS')
+scraper_screenscraper_AKL_softname = 'AKL_0.9.8'
 scraper_screenscraper_region = 0 # Default World
 scraper_screenscraper_language = 0 # Default English
 
@@ -54,7 +54,7 @@ def get_setting(key:str):
     if key == 'scraper_cache_dir': return Test_screenscraper.TEST_OUTPUT_DIR
     if key == 'scraper_screenscraper_sspass': return scraper_screenscraper_sspass 
     if key == 'scraper_screenscraper_ssid': return scraper_screenscraper_ssid 
-    if key == 'scraper_screenscraper_AEL_softname': return scraper_screenscraper_AEL_softname 
+    if key == 'scraper_screenscraper_AKL_softname': return scraper_screenscraper_AKL_softname 
     return ''
 
 def get_setting_int(key:str):
@@ -80,14 +80,14 @@ class Test_screenscraper(unittest.TestCase):
         print('TEST ASSETS DIR: {}'.format(cls.TEST_ASSETS_DIR))
         print('TEST OUTPUT DIR: {}'.format(cls.TEST_OUTPUT_DIR))
         print('---------------------------------------------------------------------------')
+        
+        if not os.path.exists(cls.TEST_OUTPUT_DIR):
+            os.makedirs(cls.TEST_OUTPUT_DIR)
     
     @unittest.skip('You must have an account key to use this test')
     @patch('resources.lib.scraper.settings.getSettingAsInt', autospec=True, side_effect=get_setting_int)
     @patch('resources.lib.scraper.settings.getSetting', autospec=True, side_effect=get_setting)
     def test_screenscraper_metadata(self, settings_mock, settingsint_mock): 
-        
-        if not os.path.exists(self.TEST_OUTPUT_DIR):
-            os.makedirs(self.TEST_OUTPUT_DIR)
         
         # --- main ---------------------------------------------------------------------------------------
         print('*** Fetching candidate game list ********************************************************')

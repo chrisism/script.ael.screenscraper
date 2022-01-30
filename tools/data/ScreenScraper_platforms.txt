@@ -70,7 +70,7 @@ ID   Name                                    Type                  ROM type  Sup
 119  GBA e-Reader                            Accessoire            rom       carte                 
 101  GP32                                    Console Portable      rom       smc                   
 87   GX4000                                  Console               rom       cartouche             
-194  Gaelco                                  Arcade                rom       pcb                   
+194  Gaklco                                  Arcade                rom       pcb                   
 52   Game &amp; Watch                        Console Portable      rom       hardware              
 9    Game Boy                                Console Portable      rom       cartouche             
 12   Game Boy Advance                        Console Portable      rom       cartouche             
