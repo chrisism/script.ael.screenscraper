@@ -1,4 +1,4 @@
-kodi.tools==1.0.0
+kodi.tools==1.1.0
 kodi-addon-checker==0.0.26
 Kodistubs==19.0.3
 routing==0.2.3
