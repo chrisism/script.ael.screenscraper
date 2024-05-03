@@ -1,1 +1,3 @@
-The initial release of Screenscraper plugin for the AKL fork.
+# Current
+- Updated to new version of AKL
+- Support for sources
